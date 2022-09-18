@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Forza4
+﻿namespace Forza4
 {
     public partial class Forza4Solitario : Form
     {
@@ -267,7 +257,7 @@ namespace Forza4
             pareggio = false;
             giocaAncora.Visible = false;
         }
-        
+
     }
 }
 
