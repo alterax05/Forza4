@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +12,16 @@ namespace Forza4
 {
     public partial class InterfacciaMultigiocatore : Form
     {
+        Color coloreSinistra;
+        String giocatoreSinistra;
+        Color coloreDestra;
+        String giocatoreDestra;
+
         public InterfacciaMultigiocatore()
         {
             InitializeComponent();
         }
-        public static string nome1 = "";
-        public static string nome2 = "";
+
         private void Segno1_Click(object sender, EventArgs e)
         {
             Giocatore1.ReadOnly = true;
@@ -26,8 +29,11 @@ namespace Forza4
             Giocatore2.Visible = true;
             Segno2.Visible = true;
 
-            Segno1 frm = new Segno1();
-            frm.Show();
+            Segno frm = new Segno();
+            frm.ShowDialog();
+
+            coloreSinistra = frm.colore;
+            giocatoreSinistra = frm.giocatoreSegno;
         }
 
         private void Segno2_Click(object sender, EventArgs e)
@@ -35,17 +41,20 @@ namespace Forza4
             Giocatore2.ReadOnly = true;
             Segno2.Visible = false;
             Gioca.Visible = true;
-            Segno2 frm = new Segno2();
-            frm.Show();   
+
+            Segno frm = new Segno();
+            frm.ShowDialog();
+
+            coloreDestra = frm.colore;
+            giocatoreDestra = frm.giocatoreSegno;
         }
 
         private void Gioca_Click(object sender, EventArgs e)
         {
-            nome1 = Giocatore1.Text;
-            nome2 = Giocatore2.Text;
-            Forza4Multigiocatore frm = new Forza4Multigiocatore();
-            frm.Show();
+            Forza4Multigiocatore frm = new Forza4Multigiocatore(Giocatore1.Text, Giocatore2.Text, coloreSinistra, giocatoreSinistra, coloreDestra, giocatoreDestra);
             this.Visible = false;
+            frm.ShowDialog();
+            this.Close();
         }
     }
 }

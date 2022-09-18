@@ -6,34 +6,33 @@ namespace Forza4
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void giocaInizio_Click(object sender, EventArgs e)
         {
-            button1.Visible = false;
-            button2.Visible = true;
-            button3.Visible = true;
+            giocaInizio.Visible = false;
+            solitario.Visible = true;
+            multigiocatore.Visible = true;
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void solitario_Click(object sender, EventArgs e)
         {
-            button2.Visible = false;
-            button3.Visible = false;
-            textBox1.Show();
-            button4.Visible = true;
-            GIOCA.Visible = true;
+            solitario.Visible = false;
+            multigiocatore.Visible = false;
+            solitario_textBox.Show();
+            scrivi_Nome.Visible = true;
+            gioca.Visible = true;
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void multigiocatore_Click(object sender, EventArgs e)
         {
             InterfacciaMultigiocatore frm = new InterfacciaMultigiocatore();
-            frm.Show();
             this.Visible = false;
+            frm.ShowDialog();
+            this.Close();
         }
-
-        private void GIOCA_Click(object sender, EventArgs e)
+        private void gioca_Click(object sender, EventArgs e)
         {
-            Forza4Solitario frm = new Forza4Solitario(textBox1.Text);
-            frm.Show();
+            Forza4Solitario frm = new Forza4Solitario(solitario_textBox.Text);
             this.Visible = false;
+            frm.ShowDialog();
+            this.Close();
         }
     }
 }

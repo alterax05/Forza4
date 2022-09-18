@@ -23,9 +23,9 @@ namespace Forza4
         int punteggiodestra = 0;
         int punteggiosinistra = 0;
 
-        //variabili che poi trasferisco nelle altre form
-        public static string nome = "";
-        public static bool vittoriasolitaria = false;
+        string nomeSolitario = "";
+        bool vittoriaSolitaria = false;
+
         public Forza4Solitario(string nome)
         {
             InitializeComponent();
@@ -42,10 +42,14 @@ namespace Forza4
         }
         private void ButtonPausa_Click(object sender, EventArgs e)
         {
-            Pausa1 frm = new Pausa1();
-            frm.Show();
+            Pausa frm = new Pausa();
+            var result = frm.ShowDialog();
+            if (result == DialogResult.Retry)
+            {
+                Ricarica();
+            }
         }
-        public void Vittoria(int riga, int colonna)
+        private void Vittoria(int riga, int colonna)
         {
             string c = "";
             string r = "";
@@ -137,13 +141,17 @@ namespace Forza4
                 //faccio vedere la form vittoria
                 vittoria = true;
                 cont = 0;
-                button1.Visible = true;
+                giocaAncora.Visible = true;
                 punteggiosinistra++;
                 PunteggioSinistra.Text = Convert.ToString(punteggiosinistra);
-                nome = GiocatoreSinistra.Text;
-                vittoriasolitaria = true;
-                Vittoria frm = new Vittoria();
-                frm.Show();
+                nomeSolitario = GiocatoreSinistra.Text;
+                vittoriaSolitaria = true;
+                Vittoria frm = new Vittoria("", "", false, nomeSolitario, vittoriaSolitaria);
+                var result = frm.ShowDialog();
+                if (result == DialogResult.Retry)
+                {
+                    Ricarica();
+                }
             }
             else
             {
@@ -152,26 +160,34 @@ namespace Forza4
                     // form sconfitta
                     punteggiodestra++;
                     cont = 0;
-                    button1.Visible = true;
+                    giocaAncora.Visible = true;
                     PunteggioDestra.Text = Convert.ToString(punteggiodestra);
                     Sconfitta frm = new Sconfitta();
-                    frm.Show();
+                    var result = frm.ShowDialog();
                     vittoria = true;
+                    if (result == DialogResult.Retry)
+                    {
+                        Ricarica();
+                    }
                 }
                 else
                 {
                     if (cont == 41)
                     {
                         //form pareggio
-                        button1.Visible = true;
+                        giocaAncora.Visible = true;
                         Pareggio frm = new Pareggio();
-                        frm.Show();
+                        var result = frm.ShowDialog();
                         pareggio = true;
+                        if (result == DialogResult.Retry)
+                        {
+                            Ricarica();
+                        }
                     }
                 }
             }
         }
-        void Computer()
+        private void Computer()
         {
             // rendo visibile botton computer
             int colonna;
@@ -201,7 +217,7 @@ namespace Forza4
                 colonna = random.Next(0, 7);
             }
         }
-        void Button_Click(object sender, EventArgs e)
+        private void Button_Click(object sender, EventArgs e)
         {
             int riga = 0;
             int colonna = (int)((Button)sender).Name[0] - 65;
@@ -222,8 +238,11 @@ namespace Forza4
                 Computer();
             }
         }
-
-        void button1_Click(object sender, EventArgs e)
+        private void giocaAncora_Click(object sender, EventArgs e)
+        {
+            Ricarica();
+        }
+        private void Ricarica()
         {
             foreach (Label l in labels)
             {
@@ -246,7 +265,7 @@ namespace Forza4
 
             vittoria = false;
             pareggio = false;
-            button1.Visible = false;
+            giocaAncora.Visible = false;
         }
         
     }

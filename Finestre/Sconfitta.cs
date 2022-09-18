@@ -10,24 +10,21 @@ using System.Windows.Forms;
 
 namespace Forza4
 {
-    public partial class Pareggio : Form
+    public partial class Sconfitta : Form
     {
-        public Pareggio()
+        public Sconfitta()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ricarica_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void tornaAllaHome_Click(object sender, EventArgs e)
         {
-            Application.OpenForms[1].Close();
-            Forza_4_Inizio frm = new Forza_4_Inizio();
-            frm.Show();
-            this.Close();
+            Application.Restart();
         }
     }
 }

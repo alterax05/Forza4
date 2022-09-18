@@ -28,20 +28,22 @@ namespace Forza4
 
         //true = sinistra
         //false = destra
-        public static string nomedestra = "";
-        public static string nomesinistra = "";
-        public static bool vittoriasinistra = false;
-        public Forza4Multigiocatore()
+
+        string nomeDestra = "";
+        string nomeSinistra = "";
+        bool vittoriaSinistra = false;
+
+        public Forza4Multigiocatore(string nomeDestra, string nomeSinistra, Color coloreSinistra, string giocatoreSinistra, Color coloreDestra, string giocatoreDestra)
         {
             InitializeComponent();
             // Scritte giocatori
-            GiocatoreSinistra.Text = InterfacciaMultigiocatore.nome1;
-            GiocatoreDestra.Text = InterfacciaMultigiocatore.nome2;
+            GiocatoreSinistra.Text = this.nomeSinistra = nomeSinistra;
+            GiocatoreDestra.Text = this.nomeDestra = nomeDestra;
             // Segni testo e colore giocatori
-            SegnoSinistra.Text = Segno1.Giocatoresegno1;
-            SegnoSinistra.ForeColor = Segno1.colore1;
-            SegnoDestra.Text = Segno2.Giocatoresegno2;
-            SegnoDestra.ForeColor = Segno2.colore2;
+            SegnoSinistra.Text = giocatoreSinistra;
+            SegnoSinistra.ForeColor = coloreSinistra;
+            SegnoDestra.Text = giocatoreDestra;
+            SegnoDestra.ForeColor = coloreDestra;
 
             labels = new Label[6, 7]{
                 {A0,B0,C0,D0,E0,F0,G0},
@@ -56,9 +58,13 @@ namespace Forza4
         private void ButtonPausa_Click(object sender, EventArgs e)
         {
             Pausa frm = new Pausa();
-            frm.Show();
+            var result = frm.ShowDialog();
+            if (result == DialogResult.Retry)
+            {
+                Ricarica();
+            }
         }
-        public void VITTORIA(int riga, int colonna)
+        public void Vittoria(int riga, int colonna)
         {
             //1 = sinistra
             //2 = destra
@@ -108,60 +114,56 @@ namespace Forza4
             {
                 labels[riga, i].ForeColor = Color.White;
             }
-
             int c_find2 = c.IndexOf(test_2);
             for (int i = c_find2; i < c_find2 + 4 && c_find2 != -1; i++)
             {
                 labels[i, colonna].ForeColor = Color.White;
             }
-
             int d1_find2 = d1.IndexOf(test_2);
             for (int i = d1_find2; i < d1_find2 + 4 && d1_find2 != -1; i++)
             {
                 labels[i, i + shift].ForeColor = Color.White;
             }
-
             int d2_find2 = d2.IndexOf(test_2);
             for (int i = riga, j = colonna; i < riga + 4 && d2_find2 != -1; i++, j--)
             {
                 labels[i, j].ForeColor = Color.White;
             }
-
             int r_find1 = r.IndexOf(test_1);
             for (int i = r_find1; i < r_find1 + 4 && r_find1 != -1; i++)
             {
                 labels[riga, i].ForeColor = Color.White;
             }
-
             int c_find1 = c.IndexOf(test_1);
             for (int i = c_find1; i < c_find1 + 4 && c_find1 != -1; i++)
             {
                 labels[i, colonna].ForeColor = Color.White;
             }
-
             int d1_find1 = d1.IndexOf(test_1);
             for (int i = d1_find1; i < d1_find1 + 4 && d1_find1 != -1; i++)
             {
                 labels[i, i + shift].ForeColor = Color.White;
             }
-
             int d2_find1 = d2.IndexOf(test_1);
             for (int i = riga, j = colonna; i < riga + 4 && d2_find1 != -1; i++, j--)
             {
                 labels[i, j].ForeColor = Color.White;
             }
-
             if (r.Contains(test_1) || c.Contains(test_1) || d1.Contains(test_1) || d2.Contains(test_1))
             {
                 vittoria = true;
                 cont = 0;
                 punteggiosinistra++;
                 PunteggioSinistra.Text = Convert.ToString(punteggiosinistra);
-                nomesinistra = GiocatoreSinistra.Text;
-                vittoriasinistra = true;
-                GIOCAANCORA.Visible = true;
-                Vittoria frm = new Vittoria();
-                frm.Show();
+                nomeSinistra = GiocatoreSinistra.Text;
+                vittoriaSinistra = true;
+                giocaAncora.Visible = true;
+                Vittoria frm = new Vittoria(nomeSinistra, nomeDestra, vittoriaSinistra, "", false);
+                var result = frm.ShowDialog();
+                if (result == DialogResult.Retry)
+                {
+                    Ricarica();
+                }
             }
             else
             {
@@ -171,24 +173,31 @@ namespace Forza4
                     cont = 0;
                     punteggiodestra++;
                     PunteggioDestra.Text = Convert.ToString(punteggiodestra);
-                    nomedestra = GiocatoreDestra.Text;
-                    vittoriasinistra = false;
-                    GIOCAANCORA.Visible = true;
-                    Vittoria frm = new Vittoria();
-                    frm.Show();
+                    nomeDestra = GiocatoreDestra.Text;
+                    vittoriaSinistra = false;
+                    giocaAncora.Visible = true;
+                    Vittoria frm = new Vittoria(nomeSinistra, nomeDestra, vittoriaSinistra, "", false);
+                    var result = frm.ShowDialog();
+                    if (result == DialogResult.Retry)
+                    {
+                        Ricarica();
+                    }
                 }
                 else
                 {
-                    if (cont==41)
+                    if (cont == 41)
                     {
-                        GIOCAANCORA.Visible = true;
+                        giocaAncora.Visible = true;
                         Pareggio frm = new Pareggio();
-                        frm.Show();
+                        var result = frm.ShowDialog();
+                        if (result == DialogResult.Retry)
+                        {
+                            Ricarica();
+                        }
                     }
                 }
             }
         }
-
         private void Button_Click(object sender, EventArgs e)
         {
             int riga = 0;
@@ -223,10 +232,14 @@ namespace Forza4
 
             turno = !turno;
 
-            VITTORIA(riga, colonna);
+            Vittoria(riga, colonna);
 
         }
-        private void GIOCAANCORA_Click(object sender, EventArgs e)
+        private void giocaAncora_Click(object sender, EventArgs e)
+        {
+            Ricarica();
+        }
+        public void Ricarica()
         {
             foreach (Label l in labels)
             {
@@ -249,7 +262,7 @@ namespace Forza4
 
             vittoria = false;
             pareggio = false;
-            GIOCAANCORA.Visible = false;
+            giocaAncora.Visible = false;
         }
-    }  
+    }
 }

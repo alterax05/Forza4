@@ -99,13 +99,13 @@
             this.Segno2.Visible = false;
             this.Segno2.Click += new System.EventHandler(this.Segno2_Click);
             // 
-            // Gioca
+            // gioca
             // 
             this.Gioca.BackColor = System.Drawing.Color.Black;
             this.Gioca.Font = new System.Drawing.Font("Stencil", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Gioca.ForeColor = System.Drawing.Color.White;
             this.Gioca.Location = new System.Drawing.Point(12, 249);
-            this.Gioca.Name = "Gioca";
+            this.Gioca.Name = "gioca";
             this.Gioca.Size = new System.Drawing.Size(328, 51);
             this.Gioca.TabIndex = 5;
             this.Gioca.Text = "GIOCA";

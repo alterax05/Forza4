@@ -100,7 +100,7 @@
             this.PunteggioDestra = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.ButtonPausa = new System.Windows.Forms.Button();
-            this.GIOCAANCORA = new System.Windows.Forms.Button();
+            this.giocaAncora = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Abutton
@@ -859,24 +859,24 @@
             this.ButtonPausa.UseVisualStyleBackColor = false;
             this.ButtonPausa.Click += new System.EventHandler(this.ButtonPausa_Click);
             // 
-            // GIOCAANCORA
+            // giocaAncora
             // 
-            this.GIOCAANCORA.BackColor = System.Drawing.Color.Transparent;
-            this.GIOCAANCORA.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.GIOCAANCORA.FlatAppearance.BorderSize = 4;
-            this.GIOCAANCORA.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.GIOCAANCORA.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.GIOCAANCORA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.GIOCAANCORA.Font = new System.Drawing.Font("Stencil", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.GIOCAANCORA.ForeColor = System.Drawing.Color.White;
-            this.GIOCAANCORA.Location = new System.Drawing.Point(30, 12);
-            this.GIOCAANCORA.Name = "GIOCAANCORA";
-            this.GIOCAANCORA.Size = new System.Drawing.Size(446, 72);
-            this.GIOCAANCORA.TabIndex = 192;
-            this.GIOCAANCORA.Text = "NUOVA PARTITA";
-            this.GIOCAANCORA.UseVisualStyleBackColor = false;
-            this.GIOCAANCORA.Visible = false;
-            this.GIOCAANCORA.Click += new System.EventHandler(this.GIOCAANCORA_Click);
+            this.giocaAncora.BackColor = System.Drawing.Color.Transparent;
+            this.giocaAncora.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.giocaAncora.FlatAppearance.BorderSize = 4;
+            this.giocaAncora.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.giocaAncora.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.giocaAncora.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.giocaAncora.Font = new System.Drawing.Font("Stencil", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.giocaAncora.ForeColor = System.Drawing.Color.White;
+            this.giocaAncora.Location = new System.Drawing.Point(30, 12);
+            this.giocaAncora.Name = "giocaAncora";
+            this.giocaAncora.Size = new System.Drawing.Size(446, 72);
+            this.giocaAncora.TabIndex = 192;
+            this.giocaAncora.Text = "NUOVA PARTITA";
+            this.giocaAncora.UseVisualStyleBackColor = false;
+            this.giocaAncora.Visible = false;
+            this.giocaAncora.Click += new System.EventHandler(this.giocaAncora_Click);
             // 
             // Forza4Multigiocatore
             // 
@@ -885,7 +885,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(584, 815);
-            this.Controls.Add(this.GIOCAANCORA);
+            this.Controls.Add(this.giocaAncora);
             this.Controls.Add(this.ButtonPausa);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.PunteggioDestra);
@@ -1035,6 +1035,6 @@
         private Button PunteggioDestra;
         private Label label9;
         private Button ButtonPausa;
-        private Button GIOCAANCORA;
+        private Button giocaAncora;
     }
 }
